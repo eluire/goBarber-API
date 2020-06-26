@@ -1,0 +1,2 @@
+Repositories são responsáveis por tratar os dados da nossa aplicação, seja qual for a estrutura de dados utilizada.
+Os atributos são privado e só os metodos da classe podem acessa-los.
