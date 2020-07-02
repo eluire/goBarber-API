@@ -1,3 +1,6 @@
 import app from "./routes/index.routes";
-
-app.listen(3333);
+import "reflect-metadata";
+import "./database";
+app.listen(3333, () => {
+  console.log("Server started!");
+});
