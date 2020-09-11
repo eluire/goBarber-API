@@ -1,1 +1,0 @@
-Models são responsáveis por definir o formato das entidades! 
