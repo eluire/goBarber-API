@@ -7,7 +7,7 @@ import usersRouter from "../infra/http/routes/users.routes";
 let fakeUsersRepository: FakeUsersRepository;
 let showProfile: ShowProfileService;
 
-describe("CreateUser", () => {
+describe("ShowProfile", () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
 

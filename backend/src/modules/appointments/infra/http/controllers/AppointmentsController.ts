@@ -3,17 +3,19 @@ import { parseISO } from "date-fns";
 import { container } from "tsyringe";
 
 import CreateAppointmentService from "@modules/appointments/services/CreateAppointmentService";
+import Appointment from "../../typeorm/entities/Appointment";
 
 export default class AppointmentController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { provider_id, date } = request.body;
+    const user_id = request.user.id;
 
-    const parsedDate = parseISO(date);
+    const { provider_id, date } = request.body;
 
     const createAppointment = container.resolve(CreateAppointmentService);
 
     const appointment = await createAppointment.execute({
-      date: parsedDate,
+      date,
+      user_id,
       provider_id,
     });
 

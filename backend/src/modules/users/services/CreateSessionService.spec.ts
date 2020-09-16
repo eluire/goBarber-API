@@ -13,15 +13,13 @@ describe("CreateSession", () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
-
-    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
     createSession = new CreateSessionService(
       fakeUsersRepository,
       fakeHashProvider
     );
   });
   it("should be able to create a session", async () => {
-    const user = await createUser.execute({
+    const user = await fakeUsersRepository.create({
       name: "John Doe",
       email: "johndoe@exemple.com",
       password: "123456",
@@ -46,7 +44,7 @@ describe("CreateSession", () => {
   });
 
   it("should not be able to create a session with wrong password", async () => {
-    await createUser.execute({
+    await fakeUsersRepository.create({
       name: "John Doe",
       email: "johndoe@exemple.com",
       password: "123456",

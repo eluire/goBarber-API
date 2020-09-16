@@ -17,7 +17,7 @@ interface Response {
 @injectable()
 class CreateSessionService {
   constructor(
-    @inject("UsersReporitory")
+    @inject("UsersRepository")
     private usersRepository: IUsersRepository,
 
     @inject("HashProvider")
