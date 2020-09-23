@@ -1,8 +1,10 @@
 import { inject, injectable } from "tsyringe";
 import nodemailer, { Transporter } from "nodemailer";
+import mailSettings from "@config/mail";
 import ISendMailDTO from "../dtos/ISendEmailDTO";
 import IMailProvider from "../models/IMailProvider";
 import IMailTemplateProvider from "@shared/container/providers/MailTamplateProvider/models/IMailTemplateProvider";
+import mail from "@config/mail";
 @injectable()
 export default class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
@@ -11,19 +13,18 @@ export default class EtherealMailProvider implements IMailProvider {
     @inject("MailTemplateProvider")
     private mailTemplateProvider: IMailTemplateProvider
   ) {
-    nodemailer.createTestAccount().then((account) => {
-      const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: {
-          user: account.user,
-          pass: account.pass,
-        },
-      });
-      this.client = transporter;
+    const transporter = nodemailer.createTransport({
+      host: "smtp.googlemail.com", // Gmail Host
+      port: 465, // Port
+      secure: true, // this is true as port is 465
+      auth: {
+        user: mailSettings.login, // generated ethereal user
+        pass: mail.password, // generated ethereal password
+      },
     });
+    this.client = transporter;
   }
+
   public async sendMail({
     to,
     from,
@@ -44,6 +45,5 @@ export default class EtherealMailProvider implements IMailProvider {
     });
 
     console.log("Message sent: %s", message.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(message));
   }
 }

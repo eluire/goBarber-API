@@ -4,6 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
@@ -15,6 +22,9 @@
     "@types/multer": "^1.4.3",
     "@types/nodemailer": "^6.4.0",
     "@types/redis": "^2.8.27",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.0",
     "jest": "^26.1.0",
     "ts-node-dev": "^1.0.0-pre.49",
     "tsconfig-paths": "^3.9.0",
@@ -22,6 +32,7 @@
   },
   "dependencies": {
     "D": "^1.0.0",
+    "aws-sdk": "^2.757.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^13.0.2",
     "class-transformer": "^0.3.1",
@@ -33,6 +44,7 @@
     "handlebars": "^4.7.6",
     "ioredis": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+    "mime": "^2.4.6",
     "mongodb": "^3.6.2",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.11",
@@ -46,7 +58,7 @@
     "uuidv4": "^6.1.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": " ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:run": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run",
